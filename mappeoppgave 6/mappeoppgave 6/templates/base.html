@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    {% block title %}
+    <title>All about python</title>
+    {% endblock %}
+</head>
+
+<body onload="run_time()">
+    <nav class="navbar">
+        <div class="mainnav">
+            <div class="home">
+                <p>free python tips</p>
+            </div>
+            <div class="links">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">more</a></li>
+                    <li><a href="{{ url_for('home') }}">about</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="main_container">
+        <div class="cont_1">
+            <div class="lib_header">
+                <h1>Python libraries</h1>
+            </div>
+            <div class="libs">
+                <ul class="libs2">
+                    <li><a draggable="false" href="{{ url_for('get_pandas') }}">pandas library</a></li>
+                    <li><a draggable="false" href="{{ url_for('get_pygame') }}">pygame library</a></li>
+                    <li><a draggable="false" href="{{ url_for('get_numpy') }}">numpy library</a></li>
+                    <li><a draggable="false" href="{{ url_for('get_scapy') }}">scapy library</a></li>
+                    <li><a draggable="false" href="{{ url_for('get_scikit') }}">scikit library</a></li>
+                    <li><a draggable="false" href="{{ url_for('get_mat') }}">matlab</a></li>
+                    <li><a draggable="false" href="{{ url_for('get_spark') }}">pyspark</a></li>
+                </ul>
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script type="text/javascript">
+    function time_it() {
+        const date_holder = document.getElementById('tany');
+        const new_date = new Date();
+        const make_new_time = `CURRENT TIME: ${new_date.toLocaleTimeString()}`;
+        date_holder.innerHTML = make_new_time;
+
+    }
+
+    function run_time() {
+        let start = setInterval(time_it, 1000);
+    }
+    </script>
+</body>
+
+</html>
