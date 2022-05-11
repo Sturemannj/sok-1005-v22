@@ -1,3 +1,7 @@
+#avokadopriser i usa 
+
+
+
 #!/usr/bin/env python
 # coding: utf-8
 
@@ -62,28 +66,3 @@ trace2 = go.Box(y=organic_avocado['average_price'], name ='Organic Avocados')
 fig.append_trace(trace1, row = 1, col=1)
 fig.append_trace(trace2, row = 1, col=2)
 fig.show()
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
