@@ -17,6 +17,7 @@ import plotly.express as px
 
 
 #leser datasaett til dataframe 
+avocado = pd.read_csv('avocado-updated-2020.csv')
 df = pd.read_csv('avocado-updated-2020.csv')
 df.info()
 #her viser innholdet til priser 
