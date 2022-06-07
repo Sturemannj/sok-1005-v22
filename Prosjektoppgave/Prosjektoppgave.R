@@ -132,6 +132,9 @@ BP2 <- setNames(aggregate(BP2$Sold, by=list(MATTYPE=BP2$Description),
 ggplot(BP2, aes(x= MATTYPE, y= Sold, fill=MATTYPE)) + geom_bar(stat="identity") + 
   theme_minimal() + labs(title = "Anntal solgte av mattyper")
 #-----------------------------------------------------------------------------
+ggplot(FD1, aes(x= County_Name, y= County_Total_Crime_Rate)) + geom_bar(stat="identity") + 
+  theme_minimal() + labs(title = "Total Crime Distribution")
+#-----------------------------------------------------------------------------
 ##Oppgave 3 / task 3 
 FD1 %>% filter(Year==2013) %>% 
   filter(Month==6) %>%  
