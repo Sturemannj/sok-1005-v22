@@ -1,0 +1,76 @@
+import numpy as np
+import pandas as pd
+import plotly.express as px 
+%matplotlib inline
+import matplotlib.pyplot as plt
+plt.style.use('seaborn-whitegrid')
+import numpy as np
+from matplotlib import pyplot as plt
+
+
+df = pd.read_csv('https://uit-sok-1006-v22.github.io/innleveringer/kraft-pris-prod.csv',delimiter=";")
+
+print(df)
+
+
+df['log_prod'] = np.log(df["Produksjon i alt"])
+df['log_pris_oslo'] = np.log(df["Oslo"])
+print(df)
+
+
+fig,ax=plt.subplots(figsize=(12, 9))
+
+#adding axis lables:
+ax.set_ylabel('log_pris_oslo')
+ax.set_xlabel('log_prod')
+
+#plotting the function:
+ax.scatter(x = df['log_prod'], y = df['log_pris_oslo'])
+ax.legend(loc='lower right',frameon=False)
+
+
+
+y = df['log_pris_oslo']
+pd.DataFrame(y)
+
+
+x=pd.DataFrame(df['log_prod'])
+x['intercept']=1
+x
+
+
+
+from statsmodels.regression.linear_model import OLS
+
+res=OLS(y,x).fit()
+
+print(res.summary())
+
+res.params
+
+
+x=np.linspace(min((df['log_prod'])), max((df['log_prod'])), 100)
+
+regression_line=res.params['intercept']+res.params['log_prod']*x
+
+ax.plot(x, regression_line,color='red')
+fig
+
+
+df.drop(21)
+
+new_df = df.drop(21)
+y = new_df["log_pris_oslo"]
+pd.DataFrame(y)
+
+x=pd.DataFrame(new_df[["År", "log_prod"]])
+x['intercept']=1
+
+
+from statsmodels.regression.linear_model import OLS
+
+res=OLS(y,x).fit()
+
+print(res.summary())
+
+res.params
