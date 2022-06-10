@@ -43,11 +43,11 @@ par(new = TRUE)
 #-----------------------------------------------------------------------------
 # Draw second plot using axis y2
 #-----------------------------------------------------------------------------
-plot(raw_oil$DATE, raw_oil$verdi, type="l", col = "red", axes = FALSE, xlab = "År", ylab = "Index 2010=100")
+plot(raw_oil$DATE, raw_oil$verdi, type="l", col = "red", axes = FALSE, xlab = "Year", ylab = "Index 2010=100")
 #-----------------------------------------------------------------------------
 axis(side = 4, labels= TRUE, tick = TRUE, at = pretty(range(raw_oil$verdi)))   
 #-----------------------------------------------------------------------------
-mtext("Pris per fat", side = 4, line = 3)
+mtext("Dollars per berrel", side = 4, line = 3)
 #-----------------------------------------------------------------------------
 axis(4, ylim = c(0, 140), col = "black", las = 1)
 
