@@ -1,0 +1,53 @@
+library(data.table)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(lubridate)
+library(cowplot)
+library(corrr)
+library(httr)
+library(zoo)
+library(scales)
+library(stringr)
+library(hrbrthemes)
+library(janitor)
+#-----------------------------------------------------------------------------
+norge_pris <- read.csv("D:/fred/D.csv")
+raw_oil <- read.csv("D:/fred/M.csv")
+#Eller-----------------------------------------------------------------------
+norge_pris <- read.csv("https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23e1e9f0&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=off&txtcolor=%23444444&ts=12&tts=12&width=1168&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=RBNOBIS&scale=left&cosd=2011-08-01&coed=2022-04-01&line_color=%234572a7&link_values=false&line_style=solid&mark_type=none&mw=3&lw=2&ost=-99999&oet=99999&mma=0&fml=a&fq=Monthly&fam=avg&fgst=lin&fgsnd=2020-02-01&line_index=1&transformation=lin&vintage_date=2022-06-01&revision_date=2022-06-01&nd=1994-01-01")
+raw_oil <- read.csv("https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23e1e9f0&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=off&txtcolor=%23444444&ts=12&tts=12&width=1168&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=DCOILBRENTEU&scale=left&cosd=2011-08-01&coed=2022-05-23&line_color=%234572a7&link_values=false&line_style=solid&mark_type=none&mw=3&lw=2&ost=-99999&oet=99999&mma=0&fml=a&fq=Daily&fam=avg&fgst=lin&fgsnd=2020-02-01&line_index=1&transformation=lin&vintage_date=2022-06-01&revision_date=2022-06-01&nd=1987-05-20")
+#-----------------------------------------------------------------------------
+is.numeric(raw_oil$DCOILBRENTEU)
+#-----------------------------------------------------------------------------
+raw_oil$DCOILBRENTEU <- as.numeric(as.character(raw_oil$DCOILBRENTEU))
+#-----------------------------------------------------------------------------
+raw_oil$DATE <- as.Date(raw_oil$DATE)
+#-----------------------------------------------------------------------------
+norge_pris$DATE <- as.Date(norge_pris$DATE)
+#-----------------------------------------------------------------------------
+names(norge_pris)[names(norge_pris) == 'RBNOBIS'] <- 'verdi'
+#-----------------------------------------------------------------------------
+names(raw_oil)[names(raw_oil) == 'DCOILBRENTEU'] <- 'verdi'
+#-----------------------------------------------------------------------------
+# Draw first plot using axis y1
+#-----------------------------------------------------------------------------
+par(mar = c(4, 4, 4, 4) + 0.3)   
+#-----------------------------------------------------------------------------
+plot(norge_pris$DATE, norge_pris$verdi, type="l", col = "blue", xlab ="", ylab ="", ylim = c(70, 105))  
+#-----------------------------------------------------------------------------
+# set parameter new=True for a new axis
+#-----------------------------------------------------------------------------
+par(new = TRUE)         
+#-----------------------------------------------------------------------------
+# Draw second plot using axis y2
+#-----------------------------------------------------------------------------
+plot(raw_oil$DATE, raw_oil$verdi, type="l", col = "red", axes = FALSE, xlab = "År", ylab = "Index 2010=100")
+#-----------------------------------------------------------------------------
+axis(side = 4, labels= TRUE, tick = TRUE, at = pretty(range(raw_oil$verdi)))   
+#-----------------------------------------------------------------------------
+mtext("Pris per fat", side = 4, line = 3)
+#-----------------------------------------------------------------------------
+axis(4, ylim = c(0, 140), col = "black", las = 1)
+
